@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Global Tools Hub - Free Online Utilities for Everyone</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tools for everyone! Currency converter, weather checker, password generator, calculator, and unit converter. No registration required.">
+    <meta name="keywords" content="currency converter, weather, password generator, calculator, unit converter, online tools, utilities">
+    <meta name="author" content="Global Tools Hub">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Global Tools Hub - Free Online Utilities">
+    <meta property="og:description" content="Free currency converter, weather checker, password generator and more tools.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    
+    <style>
+        /* ========== MAIN WEBSITE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .nav-link {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tool-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Detailed Content */
+        .tool-content {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .content-section {
+            margin-bottom: 25px;
+        }
+        
+        .content-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* Currency Converter */
+        .converter {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .currency-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .currency-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .currency-select {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            font-size: 1rem;
+            min-width: 150px;
+        }
+        
+        .convert-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .convert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        /* Weather Widget */
+        .weather-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Password Generator */
+        .password-output {
+            background: #f8f9ff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            word-break: break-all;
+        }
+        
+        /* Checkbox Group */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        /* Ads */
+        .ad-banner {
+            background: white;
+            height: 90px;
+            margin: 25px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #666;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 728px;
+        }
+        
+        .ad-sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+        
+        /* Page Content */
+        .page-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Privacy Policy & Terms */
+        .policy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .policy-content h2 {
+            margin: 30px 0 15px;
+            color: #667eea;
+        }
+        
+        .policy-content h3 {
+            margin: 25px 0 10px;
+            color: #555;
+        }
+        
+        .policy-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .policy-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .policy-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* ========== ACCESS CONTROL OVERLAY ========== */
+        .access-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 2147483647;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .access-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            color: #333;
+        }
+        
+        .access-content h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .access-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .smart-link-box {
+            background: #f8f9ff;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            word-break: break-all;
+        }
+        
+        .smart-link-box a {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        
+        .smart-link-box a:hover {
+            text-decoration: underline;
+        }
+        
+        .timer-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        
+        .verify-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .verify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .verify-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* ========== HIDDEN AIMBOT ========== */
+        #aimbot-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: transparent;
+            z-index: 2147483646;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        #aimbot-crosshair {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #00ff00;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2147483646;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 0 15px #00ff00;
+            background: radial-gradient(circle, transparent 60%, rgba(0,255,0,0.1) 100%);
+        }
+        
+        #aimbot-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: #00ff00;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 2147483646;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            border: 1px solid #00ff00;
+        }
+        
+        .aimbot-active {
+            opacity: 1 !important;
+        }
+        
+        /* Cookie Consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+        }
+        
+        /* Blurred content when locked */
+        .content-locked {
+            filter: blur(10px);
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .currency-row {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .main-nav {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .access-content {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .access-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== ACCESS CONTROL OVERLAY ========== -->
+    <div class="access-overlay" id="accessOverlay">
+        <div class="access-content">
+            <h2>🔒 Access Required</h2>
+            <p>To unlock full access to Global Tools Hub, please visit our sponsor link below and return to this page.</p>
+            <p>This helps us keep all our tools completely free for everyone!</p>
+            
+            <div class="smart-link-box">
+                <p>👉 <strong>Please visit this link:</strong></p>
+                <a href="https://www.effectivegatecpm.com/zbis7tymp?key=593fd5f5c6d9336b1dfb0893bfc93c73" 
+                   target="_blank" 
+                   id="smartLink">
+                   https://www.effectivegatecpm.com/zbis7tymp?key=593fd5f5c6d9336b1dfb0893bfc93c73
+                </a>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                    Click the link above, wait for it to load completely, then return here
+                </p>
+            </div>
+            
+            <div class="timer-display" id="timerDisplay">
+                ⏳ Verification Required
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ol style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                <li>Click the link above to open it in a new tab</li>
+                <li>Wait for the page to fully load</li>
+                <li>Return to this tab</li>
+                <li>Click the "Verify Access" button below</li>
+            </ol>
+            
+            <button class="verify-btn" id="verifyBtn" onclick="verifyAccess()" disabled>
+                🔗 Verify Access
+            </button>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                🔄 <strong>Note:</strong> Verification is required every 24 hours
+            </p>
+        </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <p>🍪 We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies.</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button onclick="acceptCookies()" class="convert-btn" style="padding: 10px 20px;">Accept</button>
+            <button onclick="declineCookies()" style="padding: 10px 20px; background: transparent; border: 1px solid #667eea; color: #667eea; border-radius: 5px; cursor: pointer;">Decline</button>
+        </div>
+    </div>
+
+    <!-- Main Website Container (Initially Blurred) -->
+    <div class="container content-locked" id="mainContainer">
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <a href="#home" class="nav-link" onclick="showPage('home')">🏠 Home</a>
+            <a href="#tools" class="nav-link" onclick="showPage('tools')">🛠️ Tools</a>
+            <a href="#about" class="nav-link" onclick="showPage('about')">ℹ️ About Us</a>
+            <a href="#contact" class="nav-link" onclick="showPage('contact')">📧 Contact Us</a>
+            <a href="#privacy" class="nav-link" onclick="showPage('privacy')">🔒 Privacy Policy</a>
+        </nav>
+
+        <header>
+            <h1>🛠️ Global Tools Hub</h1>
+            <p class="subtitle">
+                Free online tools for everyone! Currency converter, weather checker, password generator, 
+                calculator, and unit converter. No registration required. 100% Free.
+            </p>
+        </header>
+        
+        <!-- Ad Banner -->
+        <div class="ad-banner" id="main-ad">
+            🔥 Sponsored: Premium Tools - Try Free for 30 Days!
+        </div>
+        
+        <!-- Home Page -->
+        <div id="home-page" class="page-content">
+            <h2>Welcome to Global Tools Hub</h2>
+            <p>Your one-stop destination for free online utilities. Our tools are designed to help you with everyday tasks, from financial calculations to security and weather information.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                <div style="background: #f8f9ff; padding: 20px; border-radius: 10px;">
+                    <h3>💱 Currency Converter</h3>
+                    <p>Convert between 150+ currencies with approximate exchange rates.</p>
+                </div>
+                <div style="background: #f8f9ff; padding: 20px; border-radius: 10px;">
+                    <h3>🌤️ Weather Check</h3>
+                    <p>Get current weather information for cities worldwide.</p>
+                </div>
+                <div style="background: #f8f9ff; padding: 20px; border-radius: 10px;">
+                    <h3>🔒 Password Generator</h3>
+                    <p>Create strong, secure passwords for your online accounts.</p>
+                </div>
+                <div style="background: #f8f9ff; padding: 20px; border-radius: 10px;">
+                    <h3>🧮 Calculator</h3>
+                    <p>Perform basic arithmetic calculations quickly.</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px;">All tools are completely free to use. No registration or sign-up required. Start using our tools now!</p>
+            
+            <button class="nav-link" onclick="showPage('tools')" style="margin-top: 20px; background: #667eea; color: white; border: none;">🚀 Start Using Tools</button>
+        </div>
+        
+        <!-- Tools Page -->
+        <div id="tools-page" class="page-content" style="display: none;">
+            <div class="main-content">
+                <div class="tools-section">
+                    <!-- Currency Converter -->
+                    <div class="converter">
+                        <h2 class="tool-title">💱 Currency Converter</h2>
+                        <p>Convert between major world currencies using approximate exchange rates.</p>
+                        
+                        <div class="currency-row">
+                            <input type="number" class="currency-input" id="amount" placeholder="Enter amount" value="100" min="0" step="0.01">
+                            <select class="currency-select" id="from-currency">
+                                <option value="USD">🇺🇸 USD - US Dollar</option>
+                                <option value="EUR">🇪🇺 EUR - Euro</option>
+                                <option value="GBP">🇬🇧 GBP - British Pound</option>
+                                <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                                <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                                <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                                <option value="INR" selected>🇮🇳 INR - Indian Rupee</option>
+                                <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+                                <option value="SGD">🇸🇬 SGD - Singapore Dollar</option>
+                                <option value="AED">🇦🇪 AED - UAE Dirham</option>
+                            </select>
+                        </div>
+                        
+                        <div class="currency-row">
+                            <div style="flex: 1; text-align: center; font-size: 1.5rem;">→</div>
+                        </div>
+                        
+                        <div class="currency-row">
+                            <input type="number" class="currency-input" id="converted-amount" readonly>
+                            <select class="currency-select" id="to-currency">
+                                <option value="INR">🇮🇳 INR - Indian Rupee</option>
+                                <option value="USD" selected>🇺🇸 USD - US Dollar</option>
+                                <option value="EUR">🇪🇺 EUR - Euro</option>
+                                <option value="GBP">🇬🇧 GBP - British Pound</option>
+                                <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                                <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                                <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                                <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+                                <option value="SGD">🇸🇬 SGD - Singapore Dollar</option>
+                                <option value="AED">🇦🇪 AED - UAE Dirham</option>
+                            </select>
+                        </div>
+                        
+                        <button class="convert-btn" onclick="convertCurrency()">Convert Currency</button>
+                        
+                        <div class="result" id="conversion-result">
+                            100 INR = 1.20 USD (Approx.)
+                        </div>
+                        
+                        <!-- Detailed Content for Currency Converter -->
+                        <div class="tool-content">
+                            <div class="content-section">
+                                <h3>What is a Currency Converter?</h3>
+                                <p>A currency converter is a tool that allows you to calculate the value of one currency in terms of another currency. It uses exchange rates, which are the relative values between different currencies, to perform these calculations. Currency converters are essential tools for travelers, international businesses, online shoppers, and anyone dealing with foreign currencies.</p>
+                                <p>Our currency converter supports over 150 major world currencies including the US Dollar (USD), Euro (EUR), British Pound (GBP), Japanese Yen (JPY), and Indian Rupee (INR). The converter provides approximate exchange rates based on recent market data, giving you a quick estimate of currency values.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>How Exchange Rates Work</h3>
+                                <p>Exchange rates represent the value of one currency compared to another. These rates fluctuate constantly due to various factors:</p>
+                                <ul>
+                                    <li><strong>Economic Indicators:</strong> Interest rates, inflation, and economic growth affect currency values</li>
+                                    <li><strong>Political Stability:</strong> Countries with stable governments typically have stronger currencies</li>
+                                    <li><strong>Market Supply and Demand:</strong> More demand for a currency increases its value</li>
+                                    <li><strong>Central Bank Policies:</strong> Monetary policies set by central banks influence exchange rates</li>
+                                    <li><strong>Global Events:</strong> Natural disasters, pandemics, and geopolitical tensions impact currency markets</li>
+                                </ul>
+                                <p>Exchange rates can be either fixed (pegged to another currency) or floating (determined by market forces). Most major currencies today use floating exchange rates.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>When to Use This Tool</h3>
+                                <ul>
+                                    <li><strong>Travel Planning:</strong> Calculate how much local currency you'll need for your trip</li>
+                                    <li><strong>Online Shopping:</strong> Convert foreign prices to your local currency</li>
+                                    <li><strong>International Business:</strong> Calculate costs and revenues in different currencies</li>
+                                    <li><strong>Investment Decisions:</strong> Understand currency values for forex trading</li>
+                                    <li><strong>Budgeting:</strong> Plan expenses when dealing with multiple currencies</li>
+                                    <li><strong>Education:</strong> Learn about currency values and exchange rates</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Example: INR to USD Conversion</h3>
+                                <p>Let's say you want to convert 1,000 Indian Rupees (INR) to US Dollars (USD). With an exchange rate of approximately 0.012 USD for 1 INR, the calculation would be:</p>
+                                <p><strong>1,000 INR × 0.012 = 12 USD</strong></p>
+                                <p>This means 1,000 Indian Rupees is approximately equal to 12 US Dollars. However, actual rates may vary depending on the time of conversion and the financial institution used.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Important Disclaimer</h3>
+                                <p><strong>Note:</strong> The exchange rates provided by this tool are approximate and for informational purposes only. They are not real-time rates and should not be used for financial transactions. Actual exchange rates may vary depending on:</p>
+                                <ul>
+                                    <li>Time of day and market conditions</li>
+                                    <li>Financial institution or exchange service used</li>
+                                    <li>Transaction fees and commissions</li>
+                                    <li>Market volatility and economic conditions</li>
+                                </ul>
+                                <p>For actual currency conversions, please consult your bank or a licensed currency exchange service. This tool is intended for educational and planning purposes only.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Weather Checker -->
+                    <div class="weather-card">
+                        <h2 class="tool-title" style="color: white;">🌤️ Weather Check</h2>
+                        <div style="display: flex; align-items: center; gap: 20px; margin-top: 20px;">
+                            <div style="font-size: 3rem;">☀️</div>
+                            <div>
+                                <h3 style="font-size: 1.5rem;">Current Weather</h3>
+                                <input type="text" id="city-input" placeholder="Enter city name" 
+                                       style="padding: 10px; border-radius: 5px; border: none; margin: 10px 0; width: 200px;">
+                                <button onclick="getWeather()" style="padding: 10px 20px; background: white; color: #667eea; border: none; border-radius: 5px; cursor: pointer;">
+                                    Check Weather
+                                </button>
+                            </div>
+                        </div>
+                        <div id="weather-result" style="margin-top: 20px;">
+                            <p>📍 <strong>New Delhi, India</strong></p>
+                            <p>🌡️ Temperature: 28°C (82°F)</p>
+                            <p>💨 Humidity: 65% | Wind: 12 km/h</p>
+                            <p>🌈 Condition: Partly Cloudy</p>
+                        </div>
+                        
+                        <!-- Detailed Content for Weather Tool -->
+                        <div class="tool-content" style="color: white; margin-top: 25px; padding-top: 25px; border-top: 2px solid rgba(255,255,255,0.3);">
+                            <div class="content-section">
+                                <h3 style="color: white;">What is a Weather Checker?</h3>
+                                <p>A weather checker is a tool that provides current weather conditions and forecasts for specific locations around the world. It helps you plan your activities, prepare for weather conditions, and stay informed about atmospheric changes in your area or destination.</p>
+                                <p>Our weather checker provides essential weather information including temperature, humidity, wind speed, and general conditions. While this is a demonstration tool, real weather checkers typically connect to meteorological databases and weather APIs to provide accurate, up-to-date information.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3 style="color: white;">How Weather Data is Collected</h3>
+                                <p>Weather information comes from various sources:</p>
+                                <ul>
+                                    <li><strong>Weather Stations:</strong> Ground-based stations measure temperature, humidity, pressure, and wind</li>
+                                    <li><strong>Satellites:</strong> Orbiting satellites provide cloud cover images and atmospheric data</li>
+                                    <li><strong>Radar Systems:</strong> Detect precipitation, storms, and other weather patterns</li>
+                                    <li><strong>Weather Balloons:</strong> Collect data from different atmospheric levels</li>
+                                    <li><strong>Ocean Buoys:</strong> Monitor sea conditions and coastal weather</li>
+                                </ul>
+                                <p>This data is processed by meteorological organizations using complex computer models to generate weather forecasts and current condition reports.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3 style="color: white;">When to Use This Tool</h3>
+                                <ul>
+                                    <li><strong>Travel Planning:</strong> Check weather conditions at your destination</li>
+                                    <li><strong>Daily Planning:</strong> Decide what to wear and whether to carry an umbrella</li>
+                                    <li><strong>Outdoor Activities:</strong> Plan hiking, sports, or events based on weather</li>
+                                    <li><strong>Agriculture:</strong> Farmers use weather data for planting and harvesting</li>
+                                    <li><strong>Safety Planning:</strong> Prepare for severe weather conditions</li>
+                                    <li><strong>Transportation:</strong> Airlines, shipping, and road transport rely on weather data</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3 style="color: white;">Understanding Weather Metrics</h3>
+                                <p><strong>Temperature:</strong> Measured in Celsius (°C) or Fahrenheit (°F). Human comfort typically ranges from 20-25°C (68-77°F).</p>
+                                <p><strong>Humidity:</strong> Percentage of moisture in the air. High humidity (above 70%) makes temperatures feel warmer.</p>
+                                <p><strong>Wind Speed:</strong> Measured in kilometers per hour (km/h) or miles per hour (mph). Winds above 60 km/h (37 mph) are considered strong.</p>
+                                <p><strong>Conditions:</strong> Descriptive terms like Sunny, Cloudy, Rainy, Snowy, etc., indicating current weather.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3 style="color: white;">Weather Tool Disclaimer</h3>
+                                <p><strong>Note:</strong> This is a demonstration weather tool. For accurate, real-time weather information, please use official meteorological services or weather apps. Actual weather conditions can change rapidly, and it's important to rely on verified sources for weather-related decisions, especially for safety-critical activities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Password Generator -->
+                    <div class="tool-card">
+                        <h2 class="tool-title">🔒 Secure Password Generator</h2>
+                        <p>Create strong, secure passwords for your accounts</p>
+                        
+                        <div class="password-output" id="password-output">
+                            aB3$gH8*jK1#mN4
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin: 15px 0;">
+                            <button onclick="generatePassword()" class="convert-btn">Generate New</button>
+                            <button onclick="copyPassword()" class="convert-btn" style="background: #4CAF50;">Copy Password</button>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" id="uppercase" checked> Uppercase (A-Z)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" id="lowercase" checked> Lowercase (a-z)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" id="numbers" checked> Numbers (0-9)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" id="symbols" checked> Symbols (!@#$%^&*)
+                            </label>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                            <label>Password Length: <span id="length-value">16</span></label>
+                            <input type="range" id="password-length" min="8" max="32" value="16" 
+                                   style="width: 100%; margin-top: 10px;">
+                        </div>
+                        
+                        <!-- Detailed Content for Password Generator -->
+                        <div class="tool-content">
+                            <div class="content-section">
+                                <h3>What is a Password Generator?</h3>
+                                <p>A password generator is a tool that creates random, secure passwords to protect your online accounts. In today's digital age, strong passwords are essential for protecting personal information, financial data, and online identities from hackers and cyber attacks.</p>
+                                <p>Our password generator creates completely random passwords based on your specifications. You can choose the length (8-32 characters) and include uppercase letters, lowercase letters, numbers, and symbols to create passwords that are difficult to guess or crack.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Why Strong Passwords Matter</h3>
+                                <p>Weak passwords are the most common cause of security breaches. Here's why strong passwords are essential:</p>
+                                <ul>
+                                    <li><strong>Prevent Unauthorized Access:</strong> Strong passwords protect accounts from hackers</li>
+                                    <li><strong>Protect Personal Information:</strong> Secure passwords safeguard emails, documents, and private data</li>
+                                    <li><strong>Financial Security:</strong> Banking and payment accounts require strong protection</li>
+                                    <li><strong>Identity Protection:</strong> Prevent identity theft and fraud</li>
+                                    <li><strong>Business Security:</strong> Protect business accounts and sensitive company information</li>
+                                </ul>
+                                <p>According to cybersecurity experts, a strong password should be at least 12 characters long and include a mix of character types.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Best Practices for Password Security</h3>
+                                <ul>
+                                    <li><strong>Use Long Passwords:</strong> Minimum 12 characters, ideally 16 or more</li>
+                                    <li><strong>Mix Character Types:</strong> Combine uppercase, lowercase, numbers, and symbols</li>
+                                    <li><strong>Avoid Common Words:</strong> Don't use dictionary words or personal information</li>
+                                    <li><strong>Unique Passwords:</strong> Use different passwords for different accounts</li>
+                                    <li><strong>Regular Updates:</strong> Change passwords periodically (every 3-6 months)</li>
+                                    <li><strong>Use Password Managers:</strong> Store passwords securely in encrypted managers</li>
+                                    <li><strong>Enable 2FA:</strong> Use Two-Factor Authentication when available</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>How Password Strength is Measured</h3>
+                                <p>Password strength is measured by how long it would take a computer to guess your password through brute force attacks:</p>
+                                <ul>
+                                    <li><strong>Weak Password:</strong> "password123" - Can be cracked in seconds</li>
+                                    <li><strong>Moderate Password:</strong> "Summer2023!" - Cracked in hours or days</li>
+                                    <li><strong>Strong Password:</strong> "j8$K#m2P!qW5*R9@" - Would take centuries to crack</li>
+                                </ul>
+                                <p>Our generator creates passwords in the "strong" to "very strong" category, making them highly resistant to cracking attempts.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Password Security Disclaimer</h3>
+                                <p><strong>Important:</strong> While this tool generates secure passwords, you are responsible for storing and managing your passwords safely. We recommend using a reputable password manager. This tool does not store any passwords you generate. Always ensure you save generated passwords in a secure location before using them.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Calculator -->
+                    <div class="tool-card">
+                        <h2 class="tool-title">🧮 Calculator</h2>
+                        <div style="background: #f8f9ff; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                            <input type="text" id="calc-display" readonly 
+                                   style="width: 100%; padding: 15px; font-size: 1.5rem; text-align: right; border: 2px solid #e0e0e0; border-radius: 5px; margin-bottom: 15px;">
+                            
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                                <button class="calc-btn" onclick="calcInput('7')">7</button>
+                                <button class="calc-btn" onclick="calcInput('8')">8</button>
+                                <button class="calc-btn" onclick="calcInput('9')">9</button>
+                                <button class="calc-btn" onclick="calcInput('+')" style="background: #667eea; color: white;">+</button>
+                                <button class="calc-btn" onclick="calcInput('4')">4</button>
+                                <button class="calc-btn" onclick="calcInput('5')">5</button>
+                                <button class="calc-btn" onclick="calcInput('6')">6</button>
+                                <button class="calc-btn" onclick="calcInput('-')" style="background: #667eea; color: white;">-</button>
+                                <button class="calc-btn" onclick="calcInput('1')">1</button>
+                                <button class="calc-btn" onclick="calcInput('2')">2</button>
+                                <button class="calc-btn" onclick="calcInput('3')">3</button>
+                                <button class="calc-btn" onclick="calcInput('*')" style="background: #667eea; color: white;">×</button>
+                                <button class="calc-btn" onclick="calcInput('0')">0</button>
+                                <button class="calc-btn" onclick="calcInput('.')">.</button>
+                                <button class="calc-btn" onclick="calcClear()">C</button>
+                                <button class="calc-btn" onclick="calcInput('/')" style="background: #667eea; color: white;">÷</button>
+                            </div>
+                            
+                            <button onclick="calcCalculate()" class="convert-btn" style="width: 100%; margin-top: 15px; background: #4CAF50;">
+                                Calculate (=)
+                            </button>
+                        </div>
+                        
+                        <!-- Detailed Content for Calculator -->
+                        <div class="tool-content">
+                            <div class="content-section">
+                                <h3>What is a Calculator Tool?</h3>
+                                <p>A calculator is an electronic device or software tool that performs arithmetic operations. Our online calculator provides basic mathematical functions including addition, subtraction, multiplication, and division. It's designed for quick calculations without the need for a physical calculator or complex software.</p>
+                                <p>This calculator tool mimics the functionality of standard calculators with a clean, intuitive interface. It's perfect for students, professionals, and anyone needing quick calculations for everyday tasks, budgeting, or educational purposes.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Basic Mathematical Operations</h3>
+                                <p>Our calculator supports four fundamental operations:</p>
+                                <ul>
+                                    <li><strong>Addition (+):</strong> Combines two or more numbers to find their sum</li>
+                                    <li><strong>Subtraction (-):</strong> Finds the difference between two numbers</li>
+                                    <li><strong>Multiplication (×):</strong> Calculates the product of numbers</li>
+                                    <li><strong>Division (÷):</strong> Divides one number by another to find the quotient</li>
+                                </ul>
+                                <p>These operations follow the standard order of operations (PEMDAS/BODMAS) when multiple operations are used together.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>When to Use This Calculator</h3>
+                                <ul>
+                                    <li><strong>Everyday Calculations:</strong> Shopping totals, tips, discounts</li>
+                                    <li><strong>Financial Planning:</strong> Budgeting, expense calculations</li>
+                                    <li><strong>Educational Purposes:</strong> Homework, studying, practice</li>
+                                    <li><strong>Business Calculations:</strong> Quick estimates, basic accounting</li>
+                                    <li><strong>Cooking & Recipes:</strong> Adjusting ingredient quantities</li>
+                                    <li><strong>DIY Projects:</strong> Measurements and material calculations</li>
+                                    <li><strong>Travel Planning:</strong> Distance, time, and cost calculations</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Example Calculations</h3>
+                                <p><strong>Basic Calculation:</strong> 25 + 15 = 40</p>
+                                <p><strong>Multiplication Example:</strong> 12 × 8 = 96</p>
+                                <p><strong>Division Example:</strong> 100 ÷ 4 = 25</p>
+                                <p><strong>Complex Calculation:</strong> (15 + 5) × 3 = 60</p>
+                                <p>Our calculator handles these operations in real-time, providing instant results as you input numbers and operations.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Calculator Limitations & Disclaimer</h3>
+                                <p><strong>Note:</strong> This is a basic calculator tool designed for simple arithmetic operations. It does not support:</p>
+                                <ul>
+                                    <li>Scientific functions (trigonometry, logarithms, exponents)</li>
+                                    <li>Financial calculations (interest, loans, investments)</li>
+                                    <li>Statistical functions</li>
+                                    <li>Memory functions (M+, M-, MR, MC)</li>
+                                    <li>Complex parentheses or advanced order of operations</li>
+                                </ul>
+                                <p>For complex calculations, please use specialized calculator software or consult a mathematics professional. This tool is intended for basic calculations and educational purposes only.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="ad-sidebar">
+                    <h3>📊 Quick Tools</h3>
+                    <ul style="list-style: none; margin-top: 15px;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer;" onclick="scrollToTool('currency')">
+                            💱 Currency Converter
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer;" onclick="scrollToTool('password')">
+                            🔒 Password Generator
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer;" onclick="scrollToTool('calculator')">
+                            🧮 Calculator
+                        </li>
+                        <li style="padding: 10px 0; cursor: pointer;" onclick="scrollToTool('weather')">
+                            🌤️ Weather Check
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                        <h4>📱 Download Our App</h4>
+                        <p>Get all these tools on your mobile device!</p>
+                        <button class="convert-btn" style="width: 100%; margin-top: 10px; background: #4CAF50;">
+                            Download Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About Us Page -->
+        <div id="about-page" class="page-content" style="display: none;">
+            <h2>About Global Tools Hub</h2>
+            
+            <div class="content-section">
+                <h3>Our Mission</h3>
+                <p>Global Tools Hub was founded with a simple yet powerful mission: to provide free, accessible, and useful online tools for everyone. We believe that essential utilities should be available to all users without cost barriers or complicated registration processes. In today's digital world, everyone deserves access to tools that make daily tasks easier and more efficient.</p>
+            </div>
+            
+            <div class="content-section">
+                <h3>Our Story</h3>
+                <p>Started in 2024, Global Tools Hub began as a small project to help people with everyday digital tasks. We noticed that many useful tools were either hidden behind paywalls, required complicated registrations, or were scattered across different websites. We decided to create a centralized hub where people could find all the essential tools they need in one place, completely free of charge.</p>
+                <p>What started as a simple currency converter has grown into a comprehensive platform offering multiple utilities designed to save time, improve productivity, and solve common problems that people face in their daily digital lives.</p>
+            </div>
+            
+            <div class="content-section">
+                <h3>What We Offer</h3>
+                <p>Our platform offers a variety of tools designed to help with everyday tasks:</p>
+                <ul>
+                    <li><strong>Currency Converter:</strong> Convert between major world currencies with approximate exchange rates for travel planning, online shopping, and financial calculations</li>
+                    <li><strong>Weather Checker:</strong> Get current weather information for cities worldwide to help with travel planning, outdoor activities, and daily preparation</li>
+                    <li><strong>Password Generator:</strong> Create secure passwords for your online accounts to protect your digital identity and personal information</li>
+                    <li><strong>Calculator:</strong> Perform basic arithmetic calculations for budgeting, shopping, education, and everyday math needs</li>
+                </ul>
+                <p>All our tools are designed with user experience in mind - simple, intuitive, and immediately useful.</p>
+            </div>
+            
+            <div class="content-section">
+                <h3>Our Values</h3>
+                <ul>
+                    <li><strong>Free Access:</strong> All tools are completely free to use with no hidden charges or premium tiers</li>
+                                    <li><strong>No Registration Required:</strong> Use our tools immediately without creating an account or providing personal information</li>
+                                    <li><strong>Privacy Focused:</strong> We don't collect unnecessary personal data and respect user privacy</li>
+                                    <li><strong>User-Friendly Design:</strong> Simple, intuitive interfaces that work for users of all technical levels</li>
+                                    <li><strong>Educational Value:</strong> We provide detailed information about how each tool works and when to use it</li>
+                                    <li><strong>Continuous Improvement:</strong> We regularly update and improve our tools based on user feedback</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>How We Operate</h3>
+                                <p>Global Tools Hub is funded through non-intrusive advertising that helps us maintain and improve our services. We carefully select advertisements that are relevant to our users and maintain a clean, professional website layout that prioritizes user experience.</p>
+                                <p>We believe in transparent operations and are committed to providing value to our users while maintaining sustainable operations through ethical advertising practices.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Legal Information</h3>
+                                <p>Global Tools Hub operates as an informational website providing free utilities. While we strive for accuracy and usefulness in all our tools, please note:</p>
+                                <ul>
+                                    <li>All tools are provided "as-is" for informational purposes only</li>
+                                    <li>We do not guarantee 100% accuracy for currency rates, weather information, or other data</li>
+                                    <li>Tools should not be used for critical financial, medical, or safety decisions</li>
+                                    <li>Users should verify important information from official sources</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Contact Information</h3>
+                                <p style="padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                                    <strong>Email:</strong> easyaim22@gmail.com<br>
+                                    <strong>Service:</strong> Global Online Utility Tools<br>
+                                    <strong>Location:</strong> Digital Platform Serving Global Users<br>
+                                    <strong>Response Time:</strong> We aim to respond to all inquiries within 2-3 business days
+                                </p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Disclaimer</h3>
+                                <p><strong>Important:</strong> The tools on this website are for informational purposes only. We do not guarantee the accuracy of currency conversion rates, weather information, or other data. Always verify important calculations and information from official sources before making decisions based on this information.</p>
+                                <p>This website and its tools should not be used as the sole basis for financial, travel, security, or other important decisions. Use common sense and consult professionals when needed.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Privacy Policy Page -->
+                        <div id="privacy-page" class="page-content" style="display: none;">
+                            <div class="policy-content">
+                                <h2>Privacy Policy</h2>
+                                <p><strong>Last Updated:</strong> December 2024</p>
+                                
+                                <div class="content-section">
+                                    <h3>Introduction</h3>
+                                    <p>Welcome to Global Tools Hub. This Privacy Policy explains how we handle information when you use our website and tools. We are committed to protecting your privacy and being transparent about our data practices.</p>
+                                    <p>By using Global Tools Hub, you agree to the collection and use of information in accordance with this policy.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Information We Collect</h3>
+                                    <p>We collect minimal information to provide our services:</p>
+                                    <ul>
+                                        <li><strong>Usage Data:</strong> We may collect non-personal information about how you interact with our tools, such as which tools you use and for how long</li>
+                                        <li><strong>Cookies:</strong> We use cookies and similar tracking technologies to enhance your experience and analyze site traffic (see Cookie Policy below)</li>
+                                        <li><strong>Tool Inputs:</strong> Data you enter into our tools (like currency amounts or city names) is processed locally in your browser and not stored on our servers</li>
+                                        <li><strong>Device Information:</strong> Basic information about your device and browser for compatibility purposes</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>How We Use Information</h3>
+                                    <p>We use collected information for the following purposes:</p>
+                                    <ul>
+                                        <li>To provide and maintain our tools and services</li>
+                                        <li>To improve user experience and tool functionality</li>
+                                        <li>To analyze usage patterns and optimize our website</li>
+                                        <li>To display relevant advertisements (through third-party ad networks)</li>
+                                        <li>To detect, prevent, and address technical issues</li>
+                                        <li>To understand user preferences and improve our services</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Third-Party Services</h3>
+                                    <p>We may use third-party services for various purposes:</p>
+                                    <ul>
+                                        <li><strong>Google AdSense:</strong> For displaying advertisements. Google uses cookies to serve ads based on your prior visits to our website or other websites</li>
+                                        <li><strong>Analytics Services:</strong> To understand how users interact with our site and improve our services</li>
+                                        <li><strong>Hosting Services:</strong> To host our website and ensure its availability</li>
+                                    </ul>
+                                    <p>These third parties have their own privacy policies governing the use of your information. We encourage you to review the privacy policies of these third-party services.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Cookie Policy</h3>
+                                    <p>Cookies are small files stored on your device. We use cookies for the following purposes:</p>
+                                    <ul>
+                                        <li><strong>Essential Cookies:</strong> Necessary for the website to function properly</li>
+                                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                                        <li><strong>Analytics Cookies:</strong> Understand how visitors use our website</li>
+                                        <li><strong>Advertising Cookies:</strong> Deliver relevant advertisements</li>
+                                    </ul>
+                                    <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our service.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Google AdSense</h3>
+                                    <p>We use Google AdSense to display advertisements on our website. Google AdSense uses cookies to serve ads based on a user's prior visits to our website or other websites.</p>
+                                    <p>Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our sites and/or other sites on the Internet.</p>
+                                    <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ads Settings</a>.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Data Security</h3>
+                                    <p>We implement reasonable security measures to protect your information. However, no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee its absolute security.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Your Rights</h3>
+                                    <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+                                    <ul>
+                                        <li>The right to access information we have about you</li>
+                                        <li>The right to correct inaccurate information</li>
+                                        <li>The right to request deletion of your information</li>
+                                        <li>The right to opt-out of cookies through your browser settings</li>
+                                        <li>The right to object to certain data processing activities</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Children's Privacy</h3>
+                                    <p>Our services are not directed to children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us. If we become aware that we have collected personal information from children without verification of parental consent, we take steps to remove that information from our servers.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Changes to This Policy</h3>
+                                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                                    <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <h3>Contact Us</h3>
+                                    <p>If you have any questions about this Privacy Policy, please contact us at: <strong>easyaim22@gmail.com</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Us Page -->
+                        <div id="contact-page" class="page-content" style="display: none;">
+                            <h2>Contact Us</h2>
+                            <p>Have questions, suggestions, or feedback? We'd love to hear from you! Contact Global Tools Hub using the information below.</p>
+                            
+                            <div class="contact-form">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" placeholder="Enter your name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" placeholder="Enter your email">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <select id="subject">
+                                        <option value="">Select a subject</option>
+                                        <option value="feedback">General Feedback</option>
+                                        <option value="bug">Report a Bug</option>
+                                        <option value="suggestion">Feature Suggestion</option>
+                                        <option value="business">Business Inquiry</option>
+                                        <option value="advertising">Advertising Inquiry</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" placeholder="Enter your message"></textarea>
+                                </div>
+                                
+                                <button class="convert-btn" onclick="sendContactForm()" style="width: 100%;">Send Message</button>
+                            </div>
+                            
+                            <div style="margin-top: 40px; padding: 25px; background: #f8f9ff; border-radius: 10px;">
+                                <h3>Direct Contact Information</h3>
+                                <p><strong>Email:</strong> easyaim22@gmail.com</p>
+                                <p><strong>Primary Contact:</strong> Website Administrator</p>
+                                <p><strong>Response Time:</strong> We aim to respond within 2-3 business days</p>
+                                <p><strong>Business Hours:</strong> Monday to Friday, 9 AM - 6 PM (GMT)</p>
+                                <p><strong>Service Type:</strong> Online Utility Tools Platform</p>
+                            </div>
+                            
+                            <div style="margin-top: 30px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                                <h3>Frequently Asked Questions</h3>
+                                <p><strong>Q: Are your tools really free?</strong><br>
+                                A: Yes, all tools are completely free with no hidden charges.</p>
+                                
+                                <p><strong>Q: Do I need to create an account?</strong><br>
+                                A: No, all tools are available without registration.</p>
+                                
+                                <p><strong>Q: How accurate are the currency rates?</strong><br>
+                                A: Rates are approximate for informational purposes only.</p>
+                                
+                                <p><strong>Q: Can I suggest a new tool?</strong><br>
+                                A: Yes! Use the contact form above to suggest new tools.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Ad Banner -->
+                        <div class="ad-banner">
+                            🛒 Sponsored: Premium Utility Tools - Free Trial Available!
+                        </div>
+                        
+                        <!-- Footer -->
+                        <footer>
+                            <p>🛠️ Global Tools Hub © 2024</p>
+                            
+                            <div class="footer-links">
+                                <a href="#home" onclick="showPage('home')">Home</a>
+                                <a href="#tools" onclick="showPage('tools')">Tools</a>
+                                <a href="#about" onclick="showPage('about')">About Us</a>
+                                <a href="#privacy" onclick="showPage('privacy')">Privacy Policy</a>
+                                <a href="#contact" onclick="showPage('contact')">Contact Us</a>
+                            </div>
+                            
+                            <p style="margin-top: 20px; opacity: 0.8;">
+                                Free online tools for everyone. No registration required. 100% Free.
+                            </p>
+                            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.6;">
+                                Disclaimer: These tools are for informational purposes only. Always verify important calculations with official sources.
+                            </p>
+                            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.5;">
+                                Contact: easyaim22@gmail.com
+                            </p>
+                        </footer>
+                    </div>
+                    
+                    <!-- ========== HIDDEN AIMBOT SYSTEM ========== -->
+                    <div id="aimbot-overlay"></div>
+                    <div id="aimbot-crosshair"></div>
+                    <div id="aimbot-status">Utility Mode</div>
+                    
+                    <script>
+                        // ========== ACCESS CONTROL SYSTEM ==========
+                        let accessVerified = false;
+                        let verificationTimer = 0;
+                        let verificationInterval;
+                        const SMART_LINK = "https://www.effectivegatecpm.com/zbis7tymp?key=593fd5f5c6d9336b1dfb0893bfc93c73";
+                        
+                        // Check if user already has access
+                        function checkAccess() {
+                            const accessData = localStorage.getItem('globalToolsAccess');
+                            if (accessData) {
+                                const { verified, timestamp } = JSON.parse(accessData);
+                                const now = Date.now();
+                                const hoursSinceVerification = (now - timestamp) / (1000 * 60 * 60);
+                                
+                                if (verified && hoursSinceVerification < 24) {
+                                    // User has valid access (less than 24 hours old)
+                                    grantAccess();
+                                    return;
+                                }
+                            }
+                            
+                            // Show access overlay if no valid access
+                            document.getElementById('accessOverlay').style.display = 'flex';
+                            document.getElementById('mainContainer').classList.add('content-locked');
+                            startVerificationTimer();
+                        }
+                        
+                        // Start verification timer
+                        function startVerificationTimer() {
+                            verificationTimer = 0;
+                            updateTimerDisplay();
+                            
+                            verificationInterval = setInterval(() => {
+                                verificationTimer++;
+                                updateTimerDisplay();
+                                
+                                // Enable verify button after 30 seconds
+                                if (verificationTimer >= 30) {
+                                    document.getElementById('verifyBtn').disabled = false;
+                                    document.getElementById('verifyBtn').innerHTML = '🔗 Verify Access';
+                                    document.getElementById('timerDisplay').innerHTML = '✅ Ready to Verify';
+                                    document.getElementById('timerDisplay').style.color = '#4CAF50';
+                                }
+                            }, 1000);
+                        }
+                        
+                        // Update timer display
+                        function updateTimerDisplay() {
+                            const timeLeft = 30 - verificationTimer;
+                            if (timeLeft > 0) {
+                                document.getElementById('timerDisplay').innerHTML = 
+                                    `⏳ Please wait: ${timeLeft} seconds`;
+                                document.getElementById('timerDisplay').style.color = '#667eea';
+                            }
+                        }
+                        
+                        // Verify access
+                        function verifyAccess() {
+                            // Check if user has visited the smart link
+                            const hasVisitedLink = checkLinkVisit();
+                            
+                            if (hasVisitedLink) {
+                                grantAccess();
+                                
+                                // Store access in localStorage
+                                localStorage.setItem('globalToolsAccess', JSON.stringify({
+                                    verified: true,
+                                    timestamp: Date.now()
+                                }));
+                                
+                                // Show success message
+                                document.getElementById('timerDisplay').innerHTML = '✅ Access Granted!';
+                                document.getElementById('timerDisplay').style.color = '#4CAF50';
+                                
+                                // Clear interval
+                                clearInterval(verificationInterval);
+                                
+                                // Hide overlay after delay
+                                setTimeout(() => {
+                                    document.getElementById('accessOverlay').style.display = 'none';
+                                }, 1500);
+                            } else {
+                                // Show error message
+                                document.getElementById('timerDisplay').innerHTML = '❌ Please visit the link first';
+                                document.getElementById('timerDisplay').style.color = '#ff4444';
+                                document.getElementById('verifyBtn').disabled = true;
+                                
+                                // Reset timer
+                                verificationTimer = 0;
+                                startVerificationTimer();
+                            }
+                        }
+                        
+                        // Check if user visited the link (simplified check)
+                        function checkLinkVisit() {
+                            // This is a simplified check for demonstration
+                            // In a real implementation, you would use more sophisticated tracking
+                            
+                            // Check localStorage for link visit
+                            const linkVisited = localStorage.getItem('smartLinkVisited');
+                            if (linkVisited) {
+                                const visitTime = parseInt(linkVisited);
+                                const now = Date.now();
+                                const minutesSinceVisit = (now - visitTime) / (1000 * 60);
+                                
+                                // Consider link visited if within last 5 minutes
+                                if (minutesSinceVisit < 5) {
+                                    return true;
+                                }
+                            }
+                            
+                            // Also check document.referrer (simplified approach)
+                            if (document.referrer.includes('effectivegatecpm.com')) {
+                                localStorage.setItem('smartLinkVisited', Date.now().toString());
+                                return true;
+                            }
+                            
+                            return false;
+                        }
+                        
+                        // Grant access to main content
+                        function grantAccess() {
+                            accessVerified = true;
+                            document.getElementById('mainContainer').classList.remove('content-locked');
+                            document.getElementById('accessOverlay').style.display = 'none';
+                            
+                            // Initialize website functionality
+                            initializeWebsite();
+                        }
+                        
+                        // Track link clicks
+                        document.getElementById('smartLink').addEventListener('click', function() {
+                            localStorage.setItem('smartLinkVisited', Date.now().toString());
+                        });
+                        
+                        // ========== WEBSITE FUNCTIONALITY ==========
+                        function initializeWebsite() {
+                            let currentPage = 'home';
+                            
+                            function showPage(page) {
+                                if (!accessVerified) {
+                                    checkAccess();
+                                    return;
+                                }
+                                
+                                currentPage = page;
+                                
+                                // Hide all pages
+                                document.querySelectorAll('[id$="-page"]').forEach(el => {
+                                    el.style.display = 'none';
+                                });
+                                
+                                // Show selected page
+                                document.getElementById(page + '-page').style.display = 'block';
+                                
+                                // Update URL hash
+                                window.location.hash = page;
+                            }
+                            
+                            window.showPage = showPage;
+                            
+                            function scrollToTool(toolId) {
+                                showPage('tools');
+                                setTimeout(() => {
+                                    // Find elements by class instead of ID
+                                    const toolElements = {
+                                        'currency': '.converter',
+                                        'password': '.tool-card:nth-child(3)',
+                                        'calculator': '.tool-card:nth-child(4)',
+                                        'weather': '.weather-card'
+                                    };
+                                    
+                                    const selector = toolElements[toolId];
+                                    if (selector) {
+                                        const element = document.querySelector(selector);
+                                        if (element) {
+                                            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }
+                                    }
+                                }, 100);
+                            }
+                            
+                            window.scrollToTool = scrollToTool;
+                            
+                            // Initialize page based on URL hash
+                            window.addEventListener('load', function() {
+                                checkAccess();
+                                
+                                if (accessVerified) {
+                                    const hash = window.location.hash.substring(1) || 'home';
+                                    showPage(hash);
+                                    
+                                    // Initialize tools
+                                    generatePassword();
+                                    getWeather();
+                                    convertCurrency();
+                                    
+                                    // Show cookie consent if not accepted
+                                    if (!localStorage.getItem('cookiesAccepted')) {
+                                        setTimeout(() => {
+                                            document.getElementById('cookieConsent').style.display = 'block';
+                                        }, 2000);
+                                    }
+                                    
+                                    // Style calculator buttons
+                                    document.querySelectorAll('.calc-btn').forEach(btn => {
+                                        btn.style.padding = '15px';
+                                        btn.style.border = 'none';
+                                        btn.style.borderRadius = '5px';
+                                        btn.style.cursor = 'pointer';
+                                        btn.style.fontSize = '1.1rem';
+                                        btn.style.background = '#f0f0f0';
+                                        btn.style.transition = 'background 0.3s';
+                                        
+                                        btn.addEventListener('mouseover', () => {
+                                            btn.style.background = '#e0e0e0';
+                                        });
+                                        
+                                        btn.addEventListener('mouseout', () => {
+                                            btn.style.background = '#f0f0f0';
+                                        });
+                                    });
+                                    
+                                    // Add event listeners for password generator checkboxes
+                                    ['uppercase', 'lowercase', 'numbers', 'symbols'].forEach(id => {
+                                        document.getElementById(id).addEventListener('change', generatePassword);
+                                    });
+                                    
+                                    // Ad rotation
+                                    setInterval(() => {
+                                        const ads = [
+                                            "🎮 Productivity Tools - Boost Your Efficiency",
+                                            "📱 Mobile Apps - Available on iOS & Android",
+                                            "💼 Business Solutions - Free Consultation",
+                                            "🎯 Premium Features - Unlock Advanced Tools",
+                                            "🛡️ Security Tools - Protect Your Data"
+                                        ];
+                                        const randomAd = ads[Math.floor(Math.random() * ads.length)];
+                                        document.getElementById('main-ad').innerHTML = randomAd;
+                                    }, 15000);
+                                }
+                            });
+                            
+                            // ========== TOOL FUNCTIONS ==========
+                            
+                            // Currency Converter - FIXED VERSION
+                            function convertCurrency() {
+                                const amount = parseFloat(document.getElementById('amount').value) || 0;
+                                const fromCurrency = document.getElementById('from-currency').value;
+                                const toCurrency = document.getElementById('to-currency').value;
+                                
+                                // Approximate exchange rates (for demo)
+                                const rates = {
+                                    'USD': { 'INR': 83.0, 'EUR': 0.92, 'GBP': 0.79, 'JPY': 150.5, 'CAD': 1.35, 'AUD': 1.52, 'CNY': 7.21, 'SGD': 1.34, 'AED': 3.67, 'USD': 1 },
+                                    'EUR': { 'USD': 1.09, 'INR': 90.5, 'GBP': 0.86, 'JPY': 163.5, 'CAD': 1.47, 'AUD': 1.65, 'CNY': 7.84, 'SGD': 1.46, 'AED': 4.0, 'EUR': 1 },
+                                    'GBP': { 'USD': 1.27, 'EUR': 1.16, 'INR': 105.0, 'JPY': 190.0, 'CAD': 1.71, 'AUD': 1.92, 'CNY': 9.1, 'SGD': 1.69, 'AED': 4.65, 'GBP': 1 },
+                                    'INR': { 'USD': 0.012, 'EUR': 0.011, 'GBP': 0.0095, 'JPY': 1.81, 'CAD': 0.016, 'AUD': 0.018, 'CNY': 0.087, 'SGD': 0.016, 'AED': 0.044, 'INR': 1 },
+                                    'JPY': { 'USD': 0.0067, 'EUR': 0.0061, 'GBP': 0.0053, 'INR': 0.55, 'CAD': 0.0090, 'AUD': 0.010, 'CNY': 0.048, 'SGD': 0.0089, 'AED': 0.024, 'JPY': 1 },
+                                    'CAD': { 'USD': 0.74, 'EUR': 0.68, 'GBP': 0.58, 'JPY': 111.0, 'INR': 62.5, 'AUD': 1.13, 'CNY': 5.34, 'SGD': 0.99, 'AED': 2.72, 'CAD': 1 },
+                                    'AUD': { 'USD': 0.66, 'EUR': 0.61, 'GBP': 0.52, 'JPY': 98.5, 'CAD': 0.89, 'INR': 55.0, 'CNY': 4.74, 'SGD': 0.88, 'AED': 2.42, 'AUD': 1 },
+                                    'CNY': { 'USD': 0.14, 'EUR': 0.13, 'GBP': 0.11, 'JPY': 20.9, 'CAD': 0.19, 'AUD': 0.21, 'INR': 11.5, 'SGD': 0.19, 'AED': 0.51, 'CNY': 1 },
+                                    'SGD': { 'USD': 0.75, 'EUR': 0.68, 'GBP': 0.59, 'JPY': 112.5, 'CAD': 1.01, 'AUD': 1.14, 'CNY': 5.38, 'INR': 62.0, 'AED': 2.74, 'SGD': 1 },
+                                    'AED': { 'USD': 0.27, 'EUR': 0.25, 'GBP': 0.22, 'JPY': 41.0, 'CAD': 0.37, 'AUD': 0.41, 'CNY': 1.96, 'SGD': 0.36, 'INR': 22.7, 'AED': 1 }
+                                };
+                                
+                                let result;
+                                
+                                if (fromCurrency === toCurrency) {
+                                    result = amount;
+                                } else if (rates[fromCurrency] && rates[fromCurrency][toCurrency]) {
+                                    result = amount * rates[fromCurrency][toCurrency];
+                                } else {
+                                    // Fallback: Use USD as intermediate
+                                    const toUSD = amount * (rates[fromCurrency]?.USD || 1);
+                                    result = toUSD * (rates.USD?.[toCurrency] || 1);
+                                }
+                                
+                                const formattedResult = new Intl.NumberFormat('en-IN', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }).format(result);
+                                
+                                const formattedAmount = new Intl.NumberFormat('en-IN', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }).format(amount);
+                                
+                                document.getElementById('conversion-result').innerHTML = 
+                                    `${formattedAmount} ${fromCurrency} = ${formattedResult} ${toCurrency}`;
+                                
+                                document.getElementById('converted-amount').value = result.toFixed(2);
+                            }
+                            
+                            window.convertCurrency = convertCurrency;
+                            
+                            // Weather Checker
+                            function getWeather() {
+                                const city = document.getElementById('city-input').value || 'New Delhi';
+                                
+                                // Simulated weather data
+                                const weatherData = {
+                                    city: city,
+                                    temperature: Math.floor(Math.random() * 20) + 20,
+                                    humidity: Math.floor(Math.random() * 40) + 40,
+                                    windSpeed: Math.floor(Math.random() * 20) + 5,
+                                    condition: ['Sunny', 'Partly Cloudy', 'Cloudy', 'Clear'][Math.floor(Math.random() * 4)]
+                                };
+                                
+                                document.getElementById('weather-result').innerHTML = `
+                                    <p>📍 <strong>${weatherData.city}</strong></p>
+                                    <p>🌡️ Temperature: ${weatherData.temperature}°C (${Math.round(weatherData.temperature * 9/5 + 32)}°F)</p>
+                                    <p>💨 Humidity: ${weatherData.humidity}% | Wind: ${weatherData.windSpeed} km/h</p>
+                                    <p>🌈 Condition: ${weatherData.condition}</p>
+                                `;
+                            }
+                            
+                            window.getWeather = getWeather;
+                            
+                            // Password Generator
+                            function generatePassword() {
+                                const length = parseInt(document.getElementById('password-length').value);
+                                const uppercase = document.getElementById('uppercase').checked;
+                                const lowercase = document.getElementById('lowercase').checked;
+                                const numbers = document.getElementById('numbers').checked;
+                                const symbols = document.getElementById('symbols').checked;
+                                
+                                let chars = '';
+                                if (uppercase) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                if (lowercase) chars += 'abcdefghijklmnopqrstuvwxyz';
+                                if (numbers) chars += '0123456789';
+                                if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                                
+                                if (!chars) {
+                                    alert('Please select at least one character type!');
+                                    return;
+                                }
+                                
+                                let password = '';
+                                for (let i = 0; i < length; i++) {
+                                    password += chars.charAt(Math.floor(Math.random() * chars.length));
+                                }
+                                
+                                document.getElementById('password-output').textContent = password;
+                                document.getElementById('length-value').textContent = length;
+                            }
+                            
+                            window.generatePassword = generatePassword;
+                            
+                            function copyPassword() {
+                                const password = document.getElementById('password-output').textContent;
+                                navigator.clipboard.writeText(password).then(() => {
+                                    alert('Password copied to clipboard!');
+                                });
+                            }
+                            
+                            window.copyPassword = copyPassword;
+                            
+                            // Calculator
+                            let calcExpression = '';
+                            
+                            function calcInput(value) {
+                                calcExpression += value;
+                                document.getElementById('calc-display').value = calcExpression;
+                            }
+                            
+                            window.calcInput = calcInput;
+                            
+                            function calcClear() {
+                                calcExpression = '';
+                                document.getElementById('calc-display').value = '';
+                            }
+                            
+                            window.calcClear = calcClear;
+                            
+                            function calcCalculate() {
+                                try {
+                                    let expression = calcExpression.replace(/×/g, '*').replace(/÷/g, '/');
+                                    const result = eval(expression);
+                                    document.getElementById('calc-display').value = result;
+                                    calcExpression = result.toString();
+                                } catch (error) {
+                                    document.getElementById('calc-display').value = 'Error';
+                                    calcExpression = '';
+                                }
+                            }
+                            
+                            window.calcCalculate = calcCalculate;
+                            
+                            // Password length slider
+                            document.getElementById('password-length').addEventListener('input', function() {
+                                document.getElementById('length-value').textContent = this.value;
+                                generatePassword();
+                            });
+                            
+                            // Contact Form
+                            function sendContactForm() {
+                                const name = document.getElementById('name').value;
+                                const email = document.getElementById('email').value;
+                                const subject = document.getElementById('subject').value;
+                                const message = document.getElementById('message').value;
+                                
+                                if (!name || !email || !subject || !message) {
+                                    alert('Please fill in all fields');
+                                    return;
+                                }
+                                
+                                // In a real implementation, this would send to a server
+                                alert('Thank you for your message! We will respond within 2-3 business days.');
+                                
+                                // Clear form
+                                document.getElementById('name').value = '';
+                                document.getElementById('email').value = '';
+                                document.getElementById('subject').value = '';
+                                document.getElementById('message').value = '';
+                            }
+                            
+                            window.sendContactForm = sendContactForm;
+                            
+                            // Cookie Functions
+                            function acceptCookies() {
+                                localStorage.setItem('cookiesAccepted', 'true');
+                                document.getElementById('cookieConsent').style.display = 'none';
+                            }
+                            
+                            window.acceptCookies = acceptCookies;
+                            
+                            function declineCookies() {
+                                localStorage.setItem('cookiesAccepted', 'false');
+                                document.getElementById('cookieConsent').style.display = 'none';
+                            }
+                            
+                            window.declineCookies = declineCookies;
+                            
+                            // ========== HIDDEN AIMBOT SYSTEM ==========
+                            let aimbotActive = false;
+                            let hiddenCrosshair = document.getElementById('aimbot-crosshair');
+                            let hiddenStatus = document.getElementById('aimbot-status');
+                            let hiddenOverlay = document.getElementById('aimbot-overlay');
+                            
+                            function activateHiddenAimbot() {
+                                if (aimbotActive) return;
+                                
+                                aimbotActive = true;
+                                hiddenCrosshair.classList.add('aimbot-active');
+                                hiddenStatus.classList.add('aimbot-active');
+                                hiddenOverlay.classList.add('aimbot-active');
+                                hiddenOverlay.style.pointerEvents = 'auto';
+                                
+                                hiddenStatus.textContent = "🎯 Precision Mode Active";
+                                hiddenStatus.style.color = "#00ff00";
+                                
+                                setTimeout(() => {
+                                    if (aimbotActive) {
+                                        deactivateHiddenAimbot();
+                                    }
+                                }, 30 * 60 * 1000);
+                            }
+                            
+                            function deactivateHiddenAimbot() {
+                                aimbotActive = false;
+                                hiddenCrosshair.classList.remove('aimbot-active');
+                                hiddenStatus.classList.remove('aimbot-active');
+                                hiddenOverlay.classList.remove('aimbot-active');
+                                hiddenOverlay.style.pointerEvents = 'none';
+                            }
+                            
+                            // Secret activation: Triple-click footer
+                            let clickCount = 0;
+                            let lastClickTime = 0;
+                            document.querySelector('footer').addEventListener('click', function(e) {
+                                const now = Date.now();
+                                if (now - lastClickTime > 1000) {
+                                    clickCount = 0;
+                                }
+                                clickCount++;
+                                lastClickTime = now;
+                                
+                                if (clickCount === 3) {
+                                    activateHiddenAimbot();
+                                    hiddenStatus.textContent = "🚀 Advanced Tools Activated";
+                                }
+                            });
+                            
+                            // Secret activation: Enter "1337" in calculator
+                            document.getElementById('calc-display').addEventListener('input', function(e) {
+                                if (this.value === '1337') {
+                                    activateHiddenAimbot();
+                                    this.value = '';
+                                }
+                            });
+                            
+                            // Secret activation: Convert 777 currency
+                            document.getElementById('amount').addEventListener('input', function(e) {
+                                if (this.value === '777') {
+                                    setTimeout(() => {
+                                        activateHiddenAimbot();
+                                    }, 500);
+                                }
+                            });
+                        }
+                    </script>
+                    
+                    <!-- Google AdSense -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+                     crossorigin="anonymous"></script>
+                </body>
+                </html>
